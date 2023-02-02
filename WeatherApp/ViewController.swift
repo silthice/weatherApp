@@ -57,14 +57,41 @@ extension ViewController {
         
         let resource = Resource<WeatherResult>(url: url)
         
-        URLRequest.load(resource: resource)
+        //method 1 update UI thru functions usually with DispatchQueue
+//        URLRequest.load(resource: resource)
+//            .observe(on: MainScheduler.instance)
+//            .catchAndReturn(WeatherResult.emptyWeatherResult)
+//            .subscribe(onNext: { result in
+//
+//                let weather = result.main
+//                self.displayWeather(weather)
+//
+//            }).disposed(by: disposeBag)
+        
+        //method 2 using rxcocoa binding
+//        let search = URLRequest.load(resource: resource)
+//                    .observe(on: MainScheduler.instance)
+//                    .catchAndReturn(WeatherResult.emptyWeatherResult)
+//
+//        search.map { "\($0.main.temp) ℃"}
+//            .bind(to: self.temperatureLabel.rx.text)
+//            .disposed(by: disposeBag)
+//
+//        search.map { "\($0.main.humidity) 💦"}
+//            .bind(to: self.humidityLabel.rx.text)
+//            .disposed(by: disposeBag)
+        
+        //method 3 using driver
+        let search = URLRequest.load(resource: resource)
             .observe(on: MainScheduler.instance)
-            .catchAndReturn(WeatherResult.emptyWeatherResult)
-            .subscribe(onNext: { result in
-                
-                let weather = result.main
-                self.displayWeather(weather)
-                
-            }).disposed(by: disposeBag)
+            .asDriver(onErrorJustReturn: WeatherResult.emptyWeatherResult)
+        
+        search.map { "\($0.main.temp) ℃"}
+            .drive(self.temperatureLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        search.map { "\($0.main.humidity) 💦"}
+            .drive(self.humidityLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 }
