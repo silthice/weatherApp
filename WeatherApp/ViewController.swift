@@ -82,8 +82,26 @@ extension ViewController {
 //            .disposed(by: disposeBag)
         
         //method 3 using driver
+//        let search = URLRequest.load(resource: resource)
+//            .observe(on: MainScheduler.instance)
+//            .asDriver(onErrorJustReturn: WeatherResult.emptyWeatherResult)
+//
+//        search.map { "\($0.main.temp) ℃"}
+//            .drive(self.temperatureLabel.rx.text)
+//            .disposed(by: disposeBag)
+//
+//        search.map { "\($0.main.humidity) 💦"}
+//            .drive(self.humidityLabel.rx.text)
+//            .disposed(by: disposeBag)
+        
+        //method 3 + error catching
         let search = URLRequest.load(resource: resource)
             .observe(on: MainScheduler.instance)
+            .retry(3)
+            .catch { error in
+                print("city not found error", error.localizedDescription)
+                return Observable.just(WeatherResult.emptyWeatherResult)
+            }
             .asDriver(onErrorJustReturn: WeatherResult.emptyWeatherResult)
         
         search.map { "\($0.main.temp) ℃"}
