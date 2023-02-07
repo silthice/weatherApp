@@ -8,16 +8,16 @@
 import Foundation
 
 struct WeatherResult: Decodable {
-    let main: Weather
+	let main: Weather
 }
 
 extension WeatherResult {
-    static var emptyWeatherResult: WeatherResult {
-        return WeatherResult(main: Weather(temp: 0.0, humidity: 0.0))
-    }
+	static var emptyWeatherResult: WeatherResult {
+		return WeatherResult(main: Weather(temp: 0.0, humidity: 0.0))
+	}
 }
 
 struct Weather: Decodable {
-    let temp: Double
-    let humidity: Double
+	let temp: Double
+	let humidity: Double
 }

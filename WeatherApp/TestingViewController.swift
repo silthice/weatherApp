@@ -8,29 +8,19 @@
 import UIKit
 
 class TestingViewController: UIViewController {
-    override func viewDidLoad() {
-        let stringNums = [1,2,3].map({ String($0)})
-    }
+	override func viewDidLoad() {
+		let stringNums = [1, 2, 3].map { String($0) }
+	}
 }
 
-func test1(age1:Int) {
-    
-}
+func test1(age1: Int) {}
 
-func test2(age1: Int) {
-    
-}
+func test2(age1: Int) {}
 
-func test3(age3_:Int) {
-    
-}
-func test4(age4_: Int) {
-    
-}
+func test3(age3_: Int) {}
 
-func test5(age5: Int){
-}
+func test4(age4_: Int) {}
 
-func test6(age6: Int)
-{
-}
+func test5(age5: Int) {}
+
+func test6(age6: Int) {}
