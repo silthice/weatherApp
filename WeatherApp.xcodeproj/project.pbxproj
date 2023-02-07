@@ -131,6 +131,7 @@
 				8031C9C1298B532800B9AC9A /* Frameworks */,
 				8031C9C2298B532800B9AC9A /* Resources */,
 				F9F67B201E18CFC937252AA0 /* [CP] Embed Pods Frameworks */,
+				8031CA1629922CD000B9AC9A /* SwiftFormat */,
 			);
 			buildRules = (
 			);
@@ -188,6 +189,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8031CA1629922CD000B9AC9A /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
 		B6615F76C84A8C65E89A0507 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
